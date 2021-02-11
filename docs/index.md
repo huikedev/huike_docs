@@ -11,7 +11,7 @@ features:
   - title: 快速生成
     desc: 可以快速的生成\追加逻辑分层、门面、模型、路由、迁移文件等文件
   - title: 低侵入性
-    desc: 代码对TP核心框架及组件零侵入，以composer library方式实现
+    desc: 代码对TP核心框架及组件零侵入，以composer组件方式实现
 footer: Apache-2.0 License | Copyright © 2021<br />Powered by HuikeDev  [Github](https://github.com/huikedev/huike_base)   [Gitee](https://gitee.com/huikedev/huike_base)
 ---
 
