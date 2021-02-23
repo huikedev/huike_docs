@@ -1,8 +1,33 @@
 ---
 title: 示例模块
-order: 3
+order: 4
 toc: menu
 ---
+## 逻辑分层
+
+在逻辑分层中，我们以逻辑方法`app\controller\api\wechat_pay\Index::orderPaid()`举例：
+
+> 未使用路由中间件指定模块的情况下：
+
++ 控制器层：`app\controller\api\wechat_pay\Index::orderPaid()`
++ 逻辑方法：`huike\default_module\logic\controller\api\wechat_pay\Index::orderPaid()`
++ 自动验证：`huike\default_module\validate\api\wechat_pay\index\OrderPaid`
++ 服务工厂：`huike\default_module\service\api\wechat_pay\IndexService`
++ 服务门面：`huike\default_module\service\api\wechat_pay\facede\IndexService`
++ 服务Handler：`huike\default_module\service\api\wechat_pay\provider\OrderPaid`
+
+> 路由中间件指定模块为`api`的情况下：
+
++ 控制器层：`app\controller\api\wechat_pay\Index::orderPaid()`
++ 逻辑方法：`huike\api\logic\controller\wechat_pay\Index::orderPaid()`
++ 自动验证：`huike\api\validate\wechat_pay\index\OrderPaid`
++ 服务工厂：`huike\api\service\wechat_pay\IndexService`
++ 服务门面：`huike\api\service\wechat_pay\facede\IndexService`
++ 服务Handler：`huike\api\service\wechat_pay\provider\OrderPaid`
+
+**若未使用开发辅助的情况下，各个分层的创建和方法的追加会非常繁琐。所以我推荐使用[开发辅助后台](/dev_admin) 来减少机械性的工作，并严格按照逻辑分层的架构来开发项目。**
+
+## 示例模块
 
 ### 控制器
 在安装完成后，项目会自动生成一个示例模块，示例模块的控制器路径为：
@@ -105,11 +130,6 @@ toc: menu
   </ul>
 </Tree>
 
-### 路由信息
-
-<Alert type="error">
-将 <span style="color: red;">huike/huike_module/route.php</span> 中的路由配置信息复制到 <span style="color: red;">routes/app.php</span> 中即可访问
-</Alert>
 
 ### 访问测试
 

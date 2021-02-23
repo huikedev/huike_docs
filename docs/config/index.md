@@ -28,6 +28,14 @@ nav:
 - 默认值：`true`
 - 详细：系统服务中是否扩展基础验证规则
 
+## autoload_routes
+
+- 类型: `boolean`
+- 默认值：`false`
+- 详细：是否自动加载路由
+
+在debug模式下，此配置无效。debug模式下会自动加载`huike/routes/*.php`为路由。若开启此项配置，在非debug模式下，同样会自动加载路由配置（稍微影响性能和安全性）。
+
 ## log_error_level
 
 - 类型: `integer`

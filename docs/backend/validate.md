@@ -1,6 +1,6 @@
 ---
 title: 自动验证
-order: 12
+order: 15
 toc: menu
 ---
 

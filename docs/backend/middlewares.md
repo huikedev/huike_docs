@@ -1,6 +1,6 @@
 ---
 title: 中间件
-order: 8
+order: 11
 toc: menu
 ---
 
@@ -45,7 +45,7 @@ class GlobalBeforeMiddleware
 ## 路由前置中间件
 
 <Alert type="info">
-路由前置中间件与模块是绑定的，一个模块对应一个路由前置中间件，统一存放于 huike/common/middlewares 目录
+路由前置中间件与模块是绑定的，一个模块对应一个路由前置中间件，统一存放于 <span style="color: red;">huike/common/middlewares</span> 目录
 </Alert>
 
 <Alert type="error">
@@ -69,6 +69,7 @@ class DevRouteMiddleware
     public function handle($request, \Closure $next)
     {
         AppRequest::setModule('dev');
+        AppRequest::setNamespace('huikedev\dev_admin');
         bind('auth',DevAuthProvider::class);
         app('auth')->handle();
         return $next($request);

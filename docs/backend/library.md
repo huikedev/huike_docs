@@ -122,7 +122,7 @@ class DevRouteMiddleware
 
 ## Caching
 
-`Caching`是对缓存操作的封装，主要用于对模型相关数据缓存操作的封装。默认提供两种基类。
+`Caching`是对缓存操作的封装，主要用于对模型相关数据缓存操作的封装。默认提供**两种基类**。
 
 ### AppCachingAbstract
 
@@ -202,21 +202,23 @@ class DeveloperCache extends AppCachingAbstract
 
 namespace huikedev\dev_admin\common\caching\facade;
 
+
+use think\Facade;
 use huikedev\dev_admin\common\model\huike\HuikeDeveloper;
 use think\cache\Driver;
-use think\Facade;
+
 
 /**
  * @see \huikedev\dev_admin\common\caching\provider\user\DeveloperCache
  * @mixin \huikedev\dev_admin\common\caching\provider\user\DeveloperCache
- * @method int getId() static
- * @method HuikeDeveloper getModel() static
- * @method Driver cacheHandle() static
- * @method int getRedisCount() static 获取redis访问次数
- * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache force() static 强制从缓存获取数据，非刷新数据
- * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache setExpire(int $expire) static 设置有效期
- * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache refreshCache() static 刷新缓存
- * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache deleteCache() static
+ * @method int getId() static 
+ * @method HuikeDeveloper getModel() static 
+ * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache setId( $id) static 
+ * @method Driver cacheHandle() static 
+ * @method int getRedisCount() static 
+ * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache force() static 
+ * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache setExpire(int $expire) static 
+ * @method \huikedev\dev_admin\common\caching\provider\user\DeveloperCache deleteCache() static 
  */
 class DeveloperCache extends Facade
 {
@@ -232,21 +234,24 @@ class DeveloperCache extends Facade
 ```php
 // 获取ID=1的模型
 DeveloperCache::setId(1)->getModel()
-// 刷新ID=1的缓存
-DeveloperCache::setId(1)->refreshCache()
+// 删除ID=1的缓存
+DeveloperCache::setId(1)->deleteCache()
 ```
 
 <Alert type="error">
 注意：缓存数据以最后一次`setId()`为准，建议每次使用都带上setId()
 </Alert>
+<Alert type="error">
+注意：缓存并未提供刷新缓存的操作，而是只提供`deleteCache()`，目的在于让开发者手动去控制是否需要刷新，如不需要，在下次调用时，缓存类会自动获取数据库数据
+</Alert>
 
 ```php
 DeveloperCache::setId(1)->getModel()
 DeveloperCache::setId(2)->getModel()
-// 此时刷新的是ID=2的缓存
-DeveloperCache::refreshCache();
-// 再次指定ID为2时，并不会去redis中取数据，因为数据已保存在php的内存中
-DeveloperCache::setId(2)->getModel()
+// 此时删除的是ID=2的缓存
+DeveloperCache::deleteCache();
+// 此时会获取ID=2的缓存，且会重新从缓存中获取，因为上方已经执行了删除缓存操作
+DeveloperCache::getModel()
 ```
 
 ### AppSettingCacheAbstract

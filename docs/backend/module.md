@@ -1,6 +1,6 @@
 ---
 title: 模块
-order: 9
+order: 12
 toc: menu
 ---
 ## 基本概念
@@ -10,6 +10,7 @@ toc: menu
 </Alert>
 
 模块实际上是`app/controller`下的一个目录，将同一个模块的控制器放在一个统一的目录下，就形成了一个模块。再通过路由功能对请求进行分发，这样就实现了模块间的请求隔离。
+
 
 <Alert type="error">
 模块必须使用路由中间件，且需要再路由中间件中设置模块名称，如
@@ -25,6 +26,8 @@ class HuikeModuleRouteMiddleware
     }
 }
 ```
+
+**若`app\controller`下的控制器未指定模块，则会统一使用`huike\default_module\logic\controller`作为逻辑层**
 
 ### 命名规范
 

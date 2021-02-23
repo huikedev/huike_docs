@@ -1,6 +1,6 @@
 ---
-title: 本项目规范
-order: 5
+title: 项目规范
+order: 6
 toc: menu
 ---
 ## 模块
